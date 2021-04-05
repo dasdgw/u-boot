@@ -1,0 +1,18 @@
+options {
+	driveTag = 0x00;
+	flags = 0x01;
+}
+
+sources {
+	u_boot_spl="spl/u-boot-spl";
+	u_boot="u-boot";
+}
+
+section (0) {
+
+	load u_boot_spl;
+	call u_boot_spl;
+
+	load u_boot;
+	call u_boot;
+}

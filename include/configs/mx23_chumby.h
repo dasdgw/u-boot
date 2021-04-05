@@ -23,16 +23,6 @@
 #define PHYS_SDRAM_1_SIZE		0x04000000	/* 64 MB RAM */
 #define CONFIG_SYS_SDRAM_BASE		PHYS_SDRAM_1
 
-/* Environment */
-#define CONFIG_ENV_OVERWRITE
-
-/* Environment is in MMC */
-#if defined(CONFIG_CMD_MMC) && defined(CONFIG_ENV_IS_IN_MMC)
-#define CONFIG_ENV_OFFSET	(256 * 1024)
-#define CONFIG_ENV_SIZE		(16 * 1024)
-#define CONFIG_SYS_MMC_ENV_DEV	0
-#endif
-
 /* USB */
 #ifdef CONFIG_CMD_USB
 #define CONFIG_EHCI_MXS_PORT0
