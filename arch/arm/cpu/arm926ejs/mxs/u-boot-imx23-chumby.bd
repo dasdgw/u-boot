@@ -1,0 +1,55 @@
+// Falconwing STMP378x ROM command script to load and run u-boot
+
+sources {
+    power_prep="bootlets/power";
+    clocks_prep="bootlets/clocks";
+    sdram_prep="bootlets/sdram_prep";
+    //u_boot="images/u-boot-stmp378x-1.3.3";
+    u_boot_spl="u-boot-spl";
+    //u_boot="images/u-boot-spl";
+    //u_boot="images/u-boot.bin";
+    u_boot="u-boot";
+}
+
+section (0) {
+
+    //----------------------------------------------------------
+    // Power supply iinitialization.
+    //----------------------------------------------------------
+    load power_prep;
+    call power_prep;
+
+
+    //----------------------------------------------------------
+    // Clocks initialization.
+    //----------------------------------------------------------
+    load clocks_prep;
+    call clocks_prep;
+
+
+    //----------------------------------------------------------
+    // SDRAM initialization.
+    //----------------------------------------------------------
+    load sdram_prep;
+    call sdram_prep;
+
+
+    //----------------------------------------------------------
+    // Load linux command line files.
+    //----------------------------------------------------------
+    //load u_boot_spl;
+    //call u_boot_spl;
+    load u_boot;
+    jump u_boot;
+
+    // from u-boot arch/arm/cpu/arm926ejs/mxs/u-boot-imx23.bd
+    //load u_boot_spl > 0x0000;
+    //load ivt (entry = 0x0014) > 0x8000;
+    //call 0x8000;
+    // 
+    //load u_boot > 0x40008000;
+    //call 0x40008000;
+    //load u_boot > 0x0000;
+    //call 0x1000;
+    //jump u_boot;
+}
