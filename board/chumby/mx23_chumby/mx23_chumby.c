@@ -41,14 +41,6 @@ int board_early_init_f(void)
 int dram_init(void)
 {
 	return mxs_dram_init();
-
-/*
-	arch/arm/cpu/arm926ejs/mxs/mxs.c 
-	manually hacked - might could just snip this bit in here
-	data->mem_dram_size = 0x04000000;
-        gd->ram_size = data->mem_dram_size;
-*/
-
 }
 
 int board_init(void)

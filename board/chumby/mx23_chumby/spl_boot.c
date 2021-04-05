@@ -84,29 +84,18 @@ void board_init_ll(const uint32_t arg, const uint32_t *resptr)
 /* Fine-tune the DRAM configuration. */
 void mxs_adjust_memory_params(uint32_t *dram_vals)
 {
-	/* Enable Auto Precharge. */
-	dram_vals[3] |= 1 << 8;
-	/* Enable Fast Writes. */
-	dram_vals[5] |= 1 << 8;
-	/* tEMRS = 3*tCK */
-	dram_vals[10] &= ~(0x3 << 8);
-	dram_vals[10] |= (0x3 << 8);
-	/* CASLAT = 3*tCK */
-	dram_vals[11] &= ~(0x3 << 0);
-	dram_vals[11] |= (0x3 << 0);
-	/* tCKE = 1*tCK */
-	dram_vals[12] &= ~(0x7 << 0);
-	dram_vals[12] |= (0x1 << 0);
-	/* CASLAT_LIN_GATE = 3*tCK , CASLAT_LIN = 3*tCK, tWTR=2*tCK */
-	dram_vals[13] &= ~((0xf << 16) | (0xf << 24) | (0xf << 0));
-	dram_vals[13] |= (0x6 << 16) | (0x6 << 24) | (0x2 << 0);
-	/* tDAL = 6*tCK */
-	dram_vals[15] &= ~(0xf << 16);
-	dram_vals[15] |= (0x6 << 16);
-	/* tREF = 1040*tCK */
-	dram_vals[26] &= ~0xffff;
-	dram_vals[26] |= 0x0410;
-	/* tRAS_MAX = 9334*tCK */
-	dram_vals[32] &= ~0xffff;
-	dram_vals[32] |= 0x2475;
+	const uint32_t regs[] = {
+		0x01010001, 0x00010000, 0x01000000, 0x00000001,
+		0x00010101, 0x00000000, 0x00010000, 0x01000001,
+		0x01010000, 0x02020001, 0x07000200, 0x04070203,
+		0x02020000, 0x06060a01, 0x0d000201, 0x0204010d,
+		0x02080800, 0x0a300508, 0x0d0d1f00, 0x02021313,
+		0x02061521, 0x0000010a, 0x00080008, 0x00200020,
+		0x00200020, 0x00200020, 0x000003f7, 0x00000000,
+		0x00000000, 0x00000000, 0x00000020, 0x00c80000,
+		0x000a23cd, 0x204100c8, 0x00006665, 0x05a00000,
+		0x00000101, 0x00000001, 0x00000000, 0x00000000,
+		0x00010000,
+	};
+	memcpy(dram_vals, regs, sizeof(regs));
 }
