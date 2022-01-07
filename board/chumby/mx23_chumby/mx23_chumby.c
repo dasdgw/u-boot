@@ -98,16 +98,20 @@ arch/arm/include/asm/arch-mxs/iomux-mx23.h:#define MX23_PAD_PWM1__DUART_TX			MXS
 #ifdef CONFIG_CMD_USB
 int board_ehci_hcd_init(int port)
 {
-        /* Enable LAN9512 (Maxi) or GL850G (Mini) USB HUB power. */
-        gpio_direction_output(MX23_PAD_GPMI_ALE__GPIO_0_17, 1);
+        /* Enable USB HUB power. */
+        gpio_direction_output(MX23_PAD_AUART1_CTS__GPIO_0_26, 1);
+	/* Disable USB HUB reset. */
+        gpio_direction_output(MX23_PAD_AUART1_TX__GPIO_0_29, 1);
         udelay(100);
         return 0;
 }
 
 int board_ehci_hcd_exit(int port)
 {
-        /* Enable LAN9512 (Maxi) or GL850G (Mini) USB HUB power. */
-        gpio_direction_output(MX23_PAD_GPMI_ALE__GPIO_0_17, 0);
+        /* Disable USB HUB power. */
+        gpio_direction_output(MX23_PAD_AUART1_CTS__GPIO_0_26, 0);
+	/* Enable USB HUB reset. */
+        gpio_direction_output(MX23_PAD_AUART1_TX__GPIO_0_29, 0);
         return 0;
 }
 #endif
