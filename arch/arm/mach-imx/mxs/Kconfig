@@ -13,7 +13,7 @@ config TARGET_MX23_OLINUXINO
 	select BOARD_EARLY_INIT_F
 
 config TARGET_MX23_CHUMBY
-	bool "mx23_chumby krnA hack"
+	bool "Support mx23_chumby"
 	select BOARD_EARLY_INIT_F
 
 config TARGET_MX23EVK

@@ -281,9 +281,9 @@ int mxs_dram_init(void)
 	if (data->mem_dram_size == 0) {
 		printf("MXS:\n"
 			"Error, the RAM size passed up from SPL is 0!\n");
-	//	hang();
+		hang();
 	}
-	data->mem_dram_size = 0x04000000;
+
 	gd->ram_size = data->mem_dram_size;
 	return 0;
 }

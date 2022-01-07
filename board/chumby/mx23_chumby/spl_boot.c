@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0+
 /*
- * Olimex MX23 Olinuxino Boot setup
+ * Chumby chumby one falconwing setup
  *
  * Copyright (C) 2013 Marek Vasut <marex@denx.de>
  */
